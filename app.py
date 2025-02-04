@@ -1,8 +1,13 @@
 from flask import Flask, request, redirect, url_for, flash, session, render_template_string
 
 app = Flask(__name__)
-# Use your secret key here; for production, consider using an environment variable.
 app.secret_key = "21038175e1ecaf5abba836607a163f20"
+
+# Dummy user data: Replace with a database or a secure storage for production.
+allowed_users = {
+    "user1": "password1",
+    "user2": "password2"
+}
 
 # Inline HTML template with embedded CSS and JavaScript
 login_template = """
@@ -115,7 +120,6 @@ login_template = """
     // JavaScript to enhance interactivity
     document.addEventListener("DOMContentLoaded", function() {
       console.log("Interactive Login Page Loaded");
-      // You can add additional interactivity here
     });
   </script>
 </body>
@@ -129,8 +133,8 @@ def login():
         username = request.form.get("username")
         password = request.form.get("password")
         
-        # Dummy validation: Accept if both fields are provided
-        if username and password:
+        # Check against our dummy user data
+        if username in allowed_users and allowed_users[username] == password:
             session["user"] = username
             return redirect(url_for("dashboard"))
         else:
