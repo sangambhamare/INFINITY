@@ -1,8 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from config import Config
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='.')
 app.config.from_object(Config)
+
+
+
 
 # Dummy users for demonstration purposes (replace with database integration later)
 users = {
