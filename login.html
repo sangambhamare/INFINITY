@@ -1,32 +1,39 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Login Page</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <meta charset="UTF-8">
+  <title>Interactive Login Page</title>
+  <!-- Link to the CSS file -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+  <div class="login-container">
     <h2>Login</h2>
-    
     <!-- Display flash messages if any -->
     {% with messages = get_flashed_messages() %}
       {% if messages %}
-        <ul>
+        <ul class="flash-messages">
           {% for message in messages %}
-            <li style="color: red;">{{ message }}</li>
+            <li>{{ message }}</li>
           {% endfor %}
         </ul>
       {% endif %}
     {% endwith %}
     
-    <form method="POST">
-         <label for="username">Username:</label>
-         <input type="text" name="username" id="username" required>
-         <br><br>
-         <label for="password">Password:</label>
-         <input type="password" name="password" id="password" required>
-         <br><br>
-         <input type="submit" value="Login">
+    <form id="login-form" method="POST">
+      <div class="input-group">
+        <input type="text" name="username" id="username" required placeholder=" " autocomplete="off">
+        <label for="username">Username</label>
+      </div>
+      <div class="input-group">
+        <input type="password" name="password" id="password" required placeholder=" ">
+        <label for="password">Password</label>
+      </div>
+      <button type="submit">Login</button>
     </form>
+  </div>
+  
+  <!-- Link to the JavaScript file -->
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
